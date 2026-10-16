@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gym Attendance Manager</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-icon">🏋</div>
+        <div>
+          <h1>FitTrack</h1>
+          <p>GYM ATTENDANCE</p>
+        </div>
+      </div>
+      <div class="sidebar-label">WORKSPACE</div>
+      <button class="nav-item active" type="button"><span>▦</span> Dashboard</button>
+      <div class="sidebar-note">
+        <div class="note-icon">✓</div>
+        <strong>Attendance made simple</strong>
+        <p>Manage member check-ins and check-outs from one place.</p>
+      </div>
+      <div class="sidebar-footer">
+        <div class="avatar">PC</div>
+        <div><strong>Reception Staff</strong><small>Community Fitness Center</small></div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">COMMUNITY FITNESS CENTER</p>
+          <h2>Gym Dashboard</h2>
+          <p class="subtitle">Welcome! Here's the current attendance overview.</p>
+        </div>
+        <div class="today-pill"><span class="live-dot"></span><span id="todayLabel">Today's attendance</span></div>
+      </header>
+
+      <section class="stats-grid" aria-label="Attendance summary">
+        <article class="stat-card">
+          <div class="stat-top"><span>Total Members</span><span class="stat-icon blue">♙</span></div>
+          <div class="stat-number" id="totalMembers">0</div>
+          <div class="stat-caption">Registered gym members</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-top"><span>Currently Inside</span><span class="stat-icon green">↗</span></div>
+          <div class="stat-number" id="insideCount">0</div>
+          <div class="stat-caption"><span class="mini-dot green-dot"></span> Active gym attendance</div>
+        </article>
+        <article class="stat-card">
+          <div class="stat-top"><span>Outside</span><span class="stat-icon orange">↙</span></div>
+          <div class="stat-number" id="outsideCount">0</div>
+          <div class="stat-caption">Not currently in the gym</div>
+        </article>
+      </section>
+
+      <section class="content-grid">
+        <article class="panel add-panel">
+          <div class="panel-heading">
+            <div><h3>Add New Member</h3><p>Register a member to start tracking attendance.</p></div>
+            <span class="heading-icon">＋</span>
+          </div>
+          <form id="memberForm" novalidate>
+            <label for="memberId">Member ID</label>
+            <input id="memberId" name="memberId" placeholder="e.g. M-003" maxlength="20" required />
+            <label for="memberName">Full Name</label>
+            <input id="memberName" name="memberName" placeholder="Enter member's full name" maxlength="80" required />
+            <button class="primary-button" type="submit"><span>＋</span> Add Member</button>
+            <p class="form-hint">Member IDs must be unique.</p>
+          </form>
+        </article>
+
+        <article class="panel quick-panel">
+          <div class="panel-heading">
+            <div><h3>Quick Guide</h3><p>How attendance status works</p></div>
+            <span class="heading-icon pale">ⓘ</span>
+          </div>
+          <div class="guide-row">
+            <span class="guide-symbol inside-symbol">↗</span>
+            <div><strong>Check In</strong><p>Mark a member as inside the gym.</p></div>
+          </div>
+          <div class="guide-row">
+            <span class="guide-symbol outside-symbol">↙</span>
+            <div><strong>Check Out</strong><p>Mark a member as having left the gym.</p></div>
+          </div>
+          <div class="rule-note"><strong>Business rule</strong><p>A member already marked <b>Inside</b> cannot check in again.</p></div>
+        </article>
+      </section>
+
+      <section class="panel members-panel">
+        <div class="members-heading">
+          <div><h3>Member Attendance</h3><p>Search members and update their current status.</p></div>
+          <span class="member-total" id="memberTotalLabel">0 members</span>
+        </div>
+        <div class="toolbar">
+          <div class="search-wrap"><span>⌕</span><input id="searchInput" type="search" placeholder="Search by member ID or name..." aria-label="Search members" /></div>
+          <select id="statusFilter" aria-label="Filter by attendance status">
+            <option value="All">All statuses</option>
+            <option value="Inside">Inside</option>
+            <option value="Outside">Outside</option>
+          </select>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>MEMBER</th><th>MEMBER ID</th><th>STATUS</th><th>LAST ACTION</th><th class="actions-head">ACTIONS</th></tr></thead>
+            <tbody id="memberTableBody"></tbody>
+          </table>
+          <div id="emptyState" class="empty-state" hidden>
+            <div class="empty-icon">♙</div><strong>No members found</strong><p>Add a new member or adjust your search.</p>
+          </div>
+        </div>
+        <div class="table-footer"><span id="resultsLabel">Showing 0 members</span><button id="resetDemo" class="text-button" type="button">Reset sample data</button></div>
+      </section>
+      <footer class="page-footer">FitTrack <span>•</span> Gym Attendance Manager <span>•</span> Browser-based prototype</footer>
+    </main>
+  </div>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
